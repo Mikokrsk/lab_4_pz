@@ -187,7 +187,8 @@ namespace lab_3
             cup.Visible = true;
             tips.Text = $"Внесіть кошти :{price_Drink} грн";
             money_button_on();
-            price_Drink -= grn;
+            // price_Drink -= grn;
+            calculate(price_Drink ,grn);
             if (price_Drink > 0)
             {
                 tips.Text = $"Залишилося ще:{price_Drink}грн";
@@ -199,7 +200,10 @@ namespace lab_3
                 proces();
             }
         }
-
+        public int calculate( int price,int grn )
+        {
+            return price-grn;
+        }
         public void proces()
         {
             date = DateTime.Now;
@@ -329,7 +333,7 @@ namespace lab_3
 
         private void Settings_button_Click(object sender, EventArgs e)
         {
-            var form = new Form2();
+            var form = new Form3();
             form.Show(this);
         }
         /*
