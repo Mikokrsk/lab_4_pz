@@ -60,6 +60,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.cancell = new System.Windows.Forms.Button();
             this.Settings_button = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.step_1 = new System.Windows.Forms.Label();
+            this.step_3 = new System.Windows.Forms.Label();
+            this.step_2 = new System.Windows.Forms.Label();
+            this.step_5 = new System.Windows.Forms.Label();
+            this.step_4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -379,11 +386,75 @@
             this.Settings_button.UseVisualStyleBackColor = true;
             this.Settings_button.Click += new System.EventHandler(this.Settings_button_Click);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(1075, 277);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(49, 20);
+            this.label3.TabIndex = 82;
+            this.label3.Text = "aaaaa";
+            // 
+            // timer2
+            // 
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick_1);
+            // 
+            // step_1
+            // 
+            this.step_1.AutoSize = true;
+            this.step_1.Location = new System.Drawing.Point(1075, 312);
+            this.step_1.Name = "step_1";
+            this.step_1.Size = new System.Drawing.Size(49, 20);
+            this.step_1.TabIndex = 83;
+            this.step_1.Text = "aaaaa";
+            // 
+            // step_3
+            // 
+            this.step_3.AutoSize = true;
+            this.step_3.Location = new System.Drawing.Point(1075, 375);
+            this.step_3.Name = "step_3";
+            this.step_3.Size = new System.Drawing.Size(49, 20);
+            this.step_3.TabIndex = 85;
+            this.step_3.Text = "aaaaa";
+            // 
+            // step_2
+            // 
+            this.step_2.AutoSize = true;
+            this.step_2.Location = new System.Drawing.Point(1075, 340);
+            this.step_2.Name = "step_2";
+            this.step_2.Size = new System.Drawing.Size(49, 20);
+            this.step_2.TabIndex = 84;
+            this.step_2.Text = "aaaaa";
+            // 
+            // step_5
+            // 
+            this.step_5.AutoSize = true;
+            this.step_5.Location = new System.Drawing.Point(1075, 445);
+            this.step_5.Name = "step_5";
+            this.step_5.Size = new System.Drawing.Size(49, 20);
+            this.step_5.TabIndex = 87;
+            this.step_5.Text = "aaaaa";
+            // 
+            // step_4
+            // 
+            this.step_4.AutoSize = true;
+            this.step_4.Location = new System.Drawing.Point(1075, 409);
+            this.step_4.Name = "step_4";
+            this.step_4.Size = new System.Drawing.Size(49, 20);
+            this.step_4.TabIndex = 86;
+            this.step_4.Text = "aaaaa";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(970, 809);
+            this.ClientSize = new System.Drawing.Size(1378, 809);
+            this.Controls.Add(this.step_5);
+            this.Controls.Add(this.step_4);
+            this.Controls.Add(this.step_3);
+            this.Controls.Add(this.step_2);
+            this.Controls.Add(this.step_1);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.Settings_button);
             this.Controls.Add(this.cancell);
             this.Controls.Add(this.label2);
@@ -467,5 +538,12 @@
         private Label label2;
         private Button cancell;
         private Button Settings_button;
+        private System.Windows.Forms.Timer timer2;
+        public Label label3;
+        public Label step_1;
+        public Label step_3;
+        public Label step_2;
+        public Label step_5;
+        public Label step_4;
     }
 }

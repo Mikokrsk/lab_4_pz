@@ -1,15 +1,24 @@
+using System;
+using System.Threading;
+
 namespace lab_3
 {
+    
     public partial class Form1 : Form
     {
         public int price_Drink;
         public int price_Drinks;
-
+       // public int portion_suggar= 0;
         TimeSpan totalTime;
-        DateTime date;
-
+       // DateTime date;
+        //public string step__1;
+        //public string step__2;
+        //public string step__3;
+        //public string step__4;
+        //public string step__5;
+        //public string step__6;
         public int drinks;
-
+        //public int drink_id;
 
         public Form1()
         {
@@ -108,7 +117,9 @@ namespace lab_3
             using var db = new MachineContext();
             var ma = db.Machines.First();
             var drink_1 = db.Drinks.Find(ma.Drink_1);
-            drinks = drink_1.DrinkId;
+            drinks = drink_1.DrinkId ;
+            var singleton = Singleton.GetInstance();
+            singleton.Drink_price=drink_1.Price_Drink;
             if(drink_1.Portion_Drink>=1)
             {
             drink_1_button.BackColor = Color.Green;
@@ -129,6 +140,9 @@ namespace lab_3
             var ma = db.Machines.First();
             var drink_2 = db.Drinks.Find(ma.Drink_2);
             drinks = drink_2.DrinkId;
+            var singleton = Singleton.GetInstance();
+
+            singleton.Drink_price =drink_2.Price_Drink;
             if (drink_2.Portion_Drink >= 1)
             {
                 drink_2_button.BackColor = Color.Green;
@@ -148,6 +162,9 @@ namespace lab_3
             var ma = db.Machines.First() ;
             var drink_3 = db.Drinks.Find(ma.Drink_3);
             drinks = drink_3.DrinkId;
+            var singleton = Singleton.GetInstance();
+
+            singleton.Drink_price = drink_3.Price_Drink;
             if (drink_3.Portion_Drink >= 1)
             {
                 drink_3_button.BackColor = Color.Green;
@@ -167,6 +184,9 @@ namespace lab_3
             var ma = db.Machines.First();
             var drink_4 = db.Drinks.Find(ma.Drink_4);
             drinks = drink_4.DrinkId;
+            var singleton = Singleton.GetInstance();
+
+            singleton.Drink_price = drink_4.Price_Drink;
             if (drink_4.Portion_Drink >= 1)
             {
                 drink_4_button.BackColor = Color.Green;
@@ -180,7 +200,7 @@ namespace lab_3
             }
         }
 
-        public void pay(int grn)
+        public async void pay(int grn)
         {
             drink_choice.BackColor = Color.White;
             money.BackColor = Color.Green;
@@ -188,15 +208,27 @@ namespace lab_3
             tips.Text = $"Внесіть кошти :{price_Drink} грн";
             money_button_on();
             // price_Drink -= grn;
-            calculate(price_Drink ,grn);
+            price_Drink= calculate(price_Drink ,grn);
             if (price_Drink > 0)
             {
                 tips.Text = $"Залишилося ще:{price_Drink}грн";
             }
             else
             {
+                var singleton = Singleton.GetInstance();
+
+                singleton.Rest = price_Drink;
                 money_button_off();
                 money.BackColor = Color.White;
+                if(drinks!=3)
+                {
+                Client_Order.ClientCode(new Work_Drink1());
+                }
+                else
+                {
+                Client_Order.ClientCode(new Work_Drink2());
+                }
+                
                 proces();
             }
         }
@@ -208,8 +240,11 @@ namespace lab_3
 
         public void proces()
         {
-            date = DateTime.Now;
 
+            //date = DateTime.Now;
+            var singleton = Singleton.GetInstance();
+
+            singleton.dataTime = DateTime.Now;
             totalTime = new TimeSpan(0, 0, 0, 5);
 
             tips.Text = $"Зачекайте: {totalTime.ToString()}";
@@ -234,13 +269,45 @@ namespace lab_3
                 cup.Enabled = true;
                 tips.Text = "Візміть свій напій";
                 drink.BackColor = Color.Green;
+              
             }
             else
-                if(totalTime.Seconds > 0 && totalTime.Seconds < 2)
-                {
+                if (totalTime.Seconds > 0 && totalTime.Seconds < 2)
+            {
                 drink_to_cup.Visible = true;
-                }
+
+            }
         }
+
+        public void proces2()
+        {
+
+            Client_Order.ClientCode(new Work_Drink1());
+
+        } 
+
+
+        private void timer2_Tick_1(object sender, EventArgs e)
+        {
+            totalTime = totalTime.Subtract(new TimeSpan(0, 0, 0, 1));
+
+            label3.Text = $"Зачекайте: {totalTime.ToString()}";
+
+            if (totalTime.Seconds == 0)
+            {
+                timer2.Stop();
+             //   drink_to_cup.Visible = false;
+             //   cup.Enabled = true;
+                label3.Text = "Візміть свій напій";
+            //    drink.BackColor = Color.Green;
+            }
+            else
+                if (totalTime.Seconds > 0 && totalTime.Seconds < 2)
+            {
+             //   drink_to_cup.Visible = true;
+            }
+        }
+        
 
         private void cup_Click(object sender, EventArgs e)
         {
@@ -266,8 +333,10 @@ namespace lab_3
             mc.CheckPaper= mc.CheckPaper-1;
             mc.Cups= mc.Cups-1;
             drink.Portion_Drink = drink.Portion_Drink-1;
-
-            string x = $"Вартість = {drink.Price_Drink} \nРешта = {-price_Drink}  \nДата купівлі :{date}";
+            var singleton = Singleton.GetInstance();
+            singleton.Drink_price = 1000;
+            string x = $"Вартість = {singleton.Drink_price} \nРешта = {singleton.Rest} " +
+                $" \nДата купівлі :{singleton.dataTime}";
             MessageBox.Show(x, "chek") ;
             db.SaveChanges();
             //update_list_drink();
@@ -339,5 +408,91 @@ namespace lab_3
             form.Show(this);
         }
 
+    }
+    class Client_Order
+    {
+
+        public static void ClientCode(AbstractClass abstractClass)
+        {
+            abstractClass.TemplateMethod();
+            
+        }
+    }
+    abstract class AbstractClass //:Form1
+    {
+        
+        public void TemplateMethod()
+        {
+
+            this.heat_water();
+            this.drink_dilution();
+            this.add_suggar();
+            this.pour_drink();
+
+        }
+
+
+
+        protected void heat_water()
+        {
+          //   Console.WriteLine("вода нагрівається");
+            MessageBox.Show("вода нагрівається");
+           // step_1.Text = "вода нагрівається";
+          //  step__1 = "вода нагрівається";
+        }
+
+        protected void add_suggar()
+        {
+            MessageBox.Show("цукор додано");
+
+        }
+
+        protected void pour_drink()
+        {
+            MessageBox.Show("напій налито");
+
+        }
+        
+        protected abstract void drink_dilution();
+
+
+    }
+
+    class Work_Drink1 : AbstractClass
+    {
+        protected override void drink_dilution()
+        {
+
+            MessageBox.Show("напій розведено з водою");
+        }
+    }
+
+    class Work_Drink2 : AbstractClass
+    {
+        protected override void drink_dilution()
+        {
+            MessageBox.Show("пакетик кинуто у воду");
+        }
+    }
+
+
+    class Singleton
+    {
+
+        private static Singleton _instance = null;
+
+        protected Singleton() { }
+
+        public static Singleton GetInstance()
+        {
+            if (_instance == null)
+            {
+                _instance = new Singleton();
+            }
+            return _instance;
+        }
+        public  int Drink_price { get; set; }
+        public  int Rest { get; set; }
+        public DateTime dataTime { get; set; }
     }
 }
