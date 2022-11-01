@@ -200,10 +200,12 @@ namespace lab_3
                 proces();
             }
         }
+
         public int calculate( int price,int grn )
         {
             return price-grn;
         }
+
         public void proces()
         {
             date = DateTime.Now;
@@ -297,22 +299,22 @@ namespace lab_3
         }
                
         private void grn_1_Click(object sender, EventArgs e)
-        {//card.Enabled = false;
+        {
             pay(1);
         }
 
         private void grn_2_Click(object sender, EventArgs e)
-        {//card.Enabled = false;
+        {
             pay(2);
         }
 
         private void grn_5_Click(object sender, EventArgs e)
-        {//card.Enabled = false;
+        {
             pay(5);
         }
 
         private void grn_10_Click(object sender, EventArgs e)
-        {//card.Enabled = false;
+        {
             pay(10);
         }
 
@@ -336,42 +338,6 @@ namespace lab_3
             var form = new Form3();
             form.Show(this);
         }
-        /*
-        public void update_list_drink()
-        {
-            drinks_list.Items.Clear();
-            using var db = new MachineContext();
-            foreach (var item in db.Drinks)
-            {
-                drinks_list.Items.Add(item.DrinkId + " " + item.Name_Drink
-                    + " " + item.Portion_Drink + " " + item.Price_Drink);
-            }
-        }
 
-        public void update_list_mc()
-        {
-            mc_list.Items.Clear();
-            using var db = new MachineContext();
-            foreach (var item in db.Components)
-            {
-                mc_list.Items.Add(item.Machine_componentId + " " + item.CheckPaper
-                    + " " + item.Cups + " " + item.Sugar);
-            }
-        }
-
-        public void update_list_ma()
-        {
-            ma_list.Items.Clear();
-            using var db = new MachineContext();
-
-            foreach (var item in db.Machines)
-            {
-                ma_list.Items.Add(item.MachineId + " " + item.Machine_components + " " + item.Drink_1
-                    + " " + item.Drink_2 + " " + item.Drink_3 + " " + item.Drink_4);
-            }
-
-
-        }
-        */
     }
 }

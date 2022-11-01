@@ -19,7 +19,7 @@ namespace lab_3.Tests
         
             var form = new Form3();
             
-            Assert.IsTrue(form.check(login,password));
+            Assert.IsTrue(form.check_user(login,password));
         }
 
         [TestMethod()]
@@ -30,7 +30,7 @@ namespace lab_3.Tests
         
             var form = new Form3();
             
-            Assert.IsFalse(form.check(login,password));
+            Assert.IsFalse(form.check_user(login,password));
         }
 
         [TestMethod()]
@@ -41,7 +41,7 @@ namespace lab_3.Tests
 
             var form = new Form3();
 
-            Assert.IsFalse(form.check(login, password));
+            Assert.IsFalse(form.check_user(login, password));
         }
         [TestMethod()]
         public void payTestTrue()

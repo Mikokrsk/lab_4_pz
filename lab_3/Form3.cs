@@ -19,7 +19,7 @@ namespace lab_3
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if(check(login.Text,password.Text))
+            if(check_user(login.Text,password.Text))
             {
                 var form = new Form2();
                 form.Show(this);
@@ -29,7 +29,7 @@ namespace lab_3
                 MessageBox.Show("Не правильний логін , або пароль");
             }
         }
-        public bool check(string login,string password )
+        public bool check_user(string login,string password )
         {
             string login_machine = "login";
             string password_machine = "password";
